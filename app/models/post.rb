@@ -66,12 +66,17 @@ class Post < ApplicationRecord
     display_cover
   end
 
-  # URL amigável
   def to_param
-    "#{id}-#{title.to_s.parameterize}"
+    slug
   end
 
+  before_save :generate_slug
+
   private
+
+  def generate_slug
+    self.slug = title.to_s.parameterize if slug.blank?
+  end
 
   # Gera resumo automático a partir do conteúdo
   def generate_excerpt
@@ -122,12 +127,6 @@ class Post < ApplicationRecord
         errors.add(:images, "formato de arquivo não permitido")
       end
     end
-  end
-
-  # FriendlyId — só ativa se tiver slug
-  if defined?(FriendlyId) && column_names.include?('slug')
-    extend FriendlyId
-    friendly_id :title, use: :slugged
   end
 
   def set_published_at_default

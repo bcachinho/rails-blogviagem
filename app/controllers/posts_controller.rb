@@ -1,7 +1,12 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, except: %i[index show]
   before_action :set_draft_count
-  before_action :authorize_admin!, except: [:index, :show, :my_posts]
+  before_action :authorize_admin!, except: [ :index, :show, :my_posts ]
+  before_action :authenticate_user!, except: %i[index show]
+  before_action :set_post, only: [ :show, :edit, :update, :destroy, :preview, :publish ]
+  before_action :set_draft_count
+  before_action :authorize_admin!, except: [ :index, :show, :my_posts ]
+  load_and_authorize_resource except: :my_posts
   load_and_authorize_resource except: :my_posts
   protect_from_forgery except: :preview_live
 
@@ -122,13 +127,17 @@ class PostsController < ApplicationController
 
   private
 
-def post_params
-  permitted = [:title, :excerpt, :content, :status, :published_at, :cover_image, :text_alignment,
-               images: [],
-               embeds_attributes: [:id, :title, :code, :_destroy]]
-  permitted << :featured if current_user&.admin?
-  params.require(:post).permit(permitted)
-end
+  def post_params
+    permitted = [:title, :excerpt, :content, :status, :published_at, :cover_image, :text_alignment,
+                images: [],
+                embeds_attributes: [:id, :title, :code, :_destroy]]
+    permitted << :featured if current_user&.admin?
+    params.require(:post).permit(permitted)
+  end
+
+  def set_post
+    @post = Post.find_by!(slug: params[:id])
+  end
 
   def set_draft_count
     if user_signed_in?
