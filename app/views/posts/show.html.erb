@@ -1,0 +1,121 @@
+<h1 class="playfair_title_show text-center pt-5"><%= @post.title %></h1>
+<h2 class="playfair_subtitle_caroussel text-center"><%= @post.excerpt%></h2>
+<p class="text-muted">
+  <p class="blockquote-footer text-center">Publicado em <%= l(@post.published_at, format: "%A, %d de %B de %Y") %></p>
+</p>
+<span class="badge badge2 text-dark">★ <%= @post.favorites.count %> vez(es) favoritado</span>
+<hr>
+
+<div class="trix-content playfair_text p-0 post-body" style="text-align: <%= @post.text_alignment %>;">
+  <%= @post.content %>
+</div>
+
+<% if @post.embeds.any? %>
+  <h3 class="playfair_title_caroussel text-center mt-5">Mapas e Vídeos</h3>
+  <% @post.embeds.each do |embed| %>
+    <div class="mt-3">
+      <h5 class="playfair_subtitle_caroussel"><%= embed.title %></h5>
+      <div class="ratio ratio-16x9">
+        <%= embed.code.html_safe %>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+
+<% if user_signed_in? %>
+  <% if current_user.favorite?(@post) %>
+    <%= button_to "★ Remover dos Favoritos", post_favorite_path(@post),
+                  method: :delete, class: "btn btn-outline-danger btn-sm mt-5" %>
+  <% else %>
+    <%= button_to "☆ Adicionar aos Favoritos", post_favorite_path(@post),
+                  method: :post, class: "btn btn-outline-success btn-sm mt-5" %>
+  <% end %>
+<% end %>
+
+<hr>
+<h5>Compartilhar:</h5>
+<div class="d-flex gap-2">
+  <%= link_to whatsapp_share_url(@post), target: "_blank", class: "btn btn-success btn-sm" do %>
+    <i class="fab fa-whatsapp"></i> WhatsApp
+  <% end %>
+  <%= link_to twitter_share_url(@post), target: "_blank", class: "btn btn-success btn-sm" do %>
+    <i class="fab fa-twitter"></i> X
+  <% end %>
+ <%= link_to facebook_share_url(@post), target: "_blank", class: "btn btn-success btn-sm" do %>
+    <i class="fab fa-facebook"></i> Facebook
+  <% end %>
+</div>
+
+<hr>
+<h4 class="mt-4">Comentários (<%= @post.comments.approved.count %>)</h4>
+
+<!-- Form para novo comentário -->
+<% if user_signed_in? %>
+  <%= form_with(model: [@post, Comment.new], local: true) do |f| %>
+    <div class="mb-3">
+      <%= f.text_area :content, rows: 3, class: "form-control",
+                      placeholder: "Escreva seu comentário..." %>
+    </div>
+    <%= f.submit "Comentar", class: "btn btn-primary" %>
+  <% end %>
+<% else %>
+  <div class="alert alert-info">
+    Faça <%= link_to "login", new_user_session_path %> para comentar.
+  </div>
+<% end %>
+
+<div class="mt-4">
+  <% @post.comments.where(parent_id: nil).each do |comment| %>
+    <% if comment.approved? || current_user&.admin? %>
+      <div class="mb-3 p-2 border rounded">
+        <p>
+          <strong><%= comment.user&.name.presence || comment.user&.email || comment.guest_name %></strong>
+          <small class="text-muted"> • <%= l(comment.created_at, format: :short) %></small>
+        </p>
+        <p><%= comment.content %></p>
+
+        <% if current_user&.admin? && !comment.approved? %>
+          <%= button_to "Aprovar", approve_post_comment_path(@post, comment),
+                        method: :patch, class: "btn btn-sm btn-success" %>
+        <% end %>
+
+        <!-- Botão responder -->
+        <% if user_signed_in? %>
+          <button class="btn btn-link btn-sm" data-bs-toggle="collapse"
+                  data-bs-target="#reply-form-<%= comment.id %>">
+            Responder
+          </button>
+
+          <div class="collapse mt-2" id="reply-form-<%= comment.id %>">
+            <%= form_with(model: [@post, Comment.new], local: true) do |f| %>
+              <%= f.hidden_field :parent_id, value: comment.id %>
+              <div class="mb-2">
+                <%= f.text_area :content, rows: 2, class: "form-control",
+                                placeholder: "Escreva sua resposta..." %>
+              </div>
+              <%= f.submit "Enviar resposta", class: "btn btn-sm btn-primary" %>
+            <% end %>
+          </div>
+        <% end %>
+
+        <!-- Respostas -->
+        <% comment.replies.each do |reply| %>
+          <% if reply.approved? || current_user&.admin? %>
+            <div class="ms-4 mt-2 p-2 border-start">
+              <p>
+                <strong><%= reply.user&.name.presence || reply.user&.email || reply.guest_name %></strong>
+                <small class="text-muted"> • <%= l(reply.created_at, format: :short) %></small>
+              </p>
+              <p><%= reply.content %></p>
+
+              <% if current_user&.admin? && !reply.approved? %>
+                <%= button_to "Aprovar", approve_post_comment_path(@post, reply),
+                              method: :patch, class: "btn btn-sm btn-success" %>
+              <% end %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
+  <% end %>
+</div>

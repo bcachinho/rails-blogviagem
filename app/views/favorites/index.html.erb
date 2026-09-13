@@ -1,0 +1,39 @@
+<div class="container py-4">
+  <h2 class="playfair_title_caroussel">📁 Meus Favoritos</h2>
+
+  <!-- Barra de busca -->
+  <div class="row mb-4">
+    <div class="col-md-8 mx-auto">
+      <%= form_with url: favorites_path, method: :get, local: true, class: "input-group" do %>
+        <%= text_field_tag :q, @query, placeholder: "Pesquisar nos favoritos...", class: "form-control" %>
+        <button class="btn btn-outline-primary" type="submit">Buscar</button>
+      <% end %>
+    </div>
+  </div>
+
+  <% if @favorites.any? %>
+    <% @favorites.each do |post| %>
+      <div class="card mb-4 shadow-sm">
+        <% if post.display_cover.present? %>
+          <%= image_tag post.display_cover.variant(resize_to_fill: [800, 300]).processed,
+                        class: "card-img-top", style: "object-fit:cover;" %>
+        <% end %>
+        <div class="card-body">
+          <h3><%= link_to post.title, post_path(post), class: "text-dark text-decoration-none playfair_title_caroussel" %></h3>
+          <p class="text-muted playfair_substitle_caroussel"><%= post.excerpt %></p>
+          <% if post.content.present? %>
+          <p class="card-text text-muted playfair_text">
+            <%= truncate(strip_tags(post.content.to_plain_text), length: 200, separator: ' ') %>
+            <%= link_to "Ler mais →", post_path(post), class: "btn btn-sm btn-outline-primary" %>
+          </p>
+        <% end %>
+
+          <%= button_to "Remover dos Favoritos", post_favorite_path(post),
+                        method: :delete, class: "btn btn-outline-danger btn-sm ms-2" %>
+        </div>
+      </div>
+    <% end %>
+  <% else %>
+    <div class="alert alert-info">Você ainda não favoritou nenhum post.</div>
+  <% end %>
+</div>

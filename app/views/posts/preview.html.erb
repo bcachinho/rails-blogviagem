@@ -1,0 +1,29 @@
+<div class="container mt-4">
+  <h1 class="mb-3">
+    <%= @post.title.presence || "(Sem título)" %>
+    <small class="text-muted">
+      <%= @post.persisted? ? "Pré-visualização" : "Pré-visualização (não salvo)" %>
+    </small>
+  </h1>
+
+  <% if @post.excerpt.present? %>
+    <p class="text-muted"><%= strip_tags(@post.excerpt) %></p>
+  <% end %>
+
+  <div class="mb-4 post-content">
+    <%= @post.content %>
+  </div>
+
+  <div class="mt-4">
+    <% if @post.persisted? %>
+      <%= link_to "Voltar para edição", edit_post_path(@post), class: "btn btn-secondary" %>
+      <% unless @post.published? %>
+        <%= button_to "Publicar agora", publish_post_path(@post), method: :patch, class: "btn btn-success ms-2" %>
+      <% end %>
+    <% else %>
+      <%= link_to "Fechar preview", "#",
+          class: "btn btn-secondary",
+          onclick: "window.close(); return false;" %>
+    <% end %>
+  </div>
+</div>

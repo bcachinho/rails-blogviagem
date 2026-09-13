@@ -1,0 +1,61 @@
+<footer class="bg-dark text-white py-5 mt-5">
+  <div class="container">
+    <div class="row">
+
+      <!-- Coluna 1: Sobre o Blog -->
+      <div class="col-md-4 mb-4 mb-md-0">
+        <h5 class="text-uppercase mb-4">Sobre o Blog</h5>
+        <p class="text-muted">
+          Seu blog de viagens é o lugar perfeito para explorar novos destinos,
+          dicas de roteiros e histórias inspiradoras. Junte-se a nós nessa jornada!
+        </p>
+      </div>
+
+      <!-- Coluna 2: Links Rápidos -->
+      <div class="col-md-4 mb-4 mb-md-0">
+        <h5 class="text-uppercase mb-4">Links Rápidos</h5>
+        <ul class="list-unstyled">
+          <li><%= link_to "Home", root_path, class: "text-muted text-decoration-none" %></li>
+          <li><%= link_to "Posts", posts_path, class: "text-muted text-decoration-none" %></li>
+          <% if user_signed_in? %>
+            <li><%= link_to "Meus Favoritos", favorites_path, class: "text-muted text-decoration-none" %></li>
+            <li><%= link_to "Meus Rascunhos", my_posts_posts_path, class: "text-muted text-decoration-none" %></li>
+          <% end %>
+          <li><%= link_to "Contato", "#", class: "text-muted text-decoration-none" %></li>
+        </ul>
+      </div>
+
+      <!-- Coluna 3: Redes Sociais e Contato -->
+      <div class="col-md-4 mb-4 mb-md-0">
+        <h5 class="text-uppercase mb-4">Siga-nos</h5>
+        <div class="d-flex mb-3">
+          <a href="https://facebook.com/seublog" target="_blank" class="text-white me-3">
+            <i class="fab fa-facebook-f fa-lg"></i>
+          </a>
+          <a href="https://instagram.com/seublog" target="_blank" class="text-white me-3">
+            <i class="fab fa-instagram fa-lg"></i>
+          </a>
+          <a href="https://twitter.com/seublog" target="_blank" class="text-white me-3">
+            <i class="fab fa-twitter fa-lg"></i>
+          </a>
+          <a href="https://pinterest.com/seublog" target="_blank" class="text-white me-3">
+            <i class="fab fa-pinterest-p fa-lg"></i>
+          </a>
+        </div>
+        <p class="text-muted">Email: contato@seublog.com</p>
+        <p class="text-muted">Telefone: (XX) XXXX-XXXX</p>
+      </div>
+
+    </div>
+
+    <hr class="my-4 border-secondary">
+
+    <!-- Direitos Autorais -->
+    <div class="row">
+      <div class="col-12 text-center">
+        <p class="text-muted mb-0">&copy; <%= Time.current.year %> Seu Blog de Viagens. Todos os direitos reservados.</p>
+      </div>
+    </div>
+
+  </div>
+</footer>

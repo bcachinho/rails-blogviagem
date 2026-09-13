@@ -1,0 +1,13 @@
+<%# app/views/active_storage/blobs/_blob.html.erb %>
+<% if blob.image? %>
+  <%= image_tag blob.representation(resize_to_limit: [900, 900]).processed,
+                class: "img-fluid rounded my-3" %>
+  <% if blob.metadata[:caption].present? %>
+    <figcaption class="text-muted text-center"><%= blob.metadata[:caption] %></figcaption>
+  <% end %>
+<% else %>
+  <p>
+    <%= link_to blob.filename, url_for(blob), class: "btn btn-sm btn-outline-secondary" %>
+    (<%= number_to_human_size(blob.byte_size) %>)
+  </p>
+<% end %>

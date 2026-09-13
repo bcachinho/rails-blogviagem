@@ -1,0 +1,123 @@
+<%= form_with(model: post, local: true) do |f| %>
+  <% if post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(post.errors.count, "erro") %> impediram o post de ser salvo:</h2>
+      <ul>
+        <% post.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <!-- TÍTULO -->
+  <div class="mb-3">
+    <%= f.label :title, "Título", class: "form-label" %>
+    <%= f.text_field :title,
+                    class: "form-control",
+                    maxlength: 40,
+                    data: { controller: "character-counter", target: "title-counter" } %>
+    <div class="form-text">
+      <span id="title-counter">0</span>/40 caracteres
+    </div>
+  </div>
+
+  <!-- EXCERPT -->
+  <div class="mb-3">
+    <%= f.label :excerpt, "Subtítulo / Resumo", class: "form-label" %>
+    <%= f.text_field :excerpt,
+                    class: "form-control",
+                    maxlength: 150,
+                    data: { controller: "character-counter", target: "excerpt-counter" } %>
+    <div class="form-text">
+      <span id="excerpt-counter">0</span>/150 caracteres
+    </div>
+  </div>
+
+  <!-- DATA DE PUBLICAÇÃO -->
+  <div class="mb-3">
+    <%= f.label :published_at, "Data de Publicação", class: "form-label" %>
+    <%= f.datetime_local_field :published_at,
+      value: f.object.published_at&.in_time_zone("America/Sao_Paulo")&.strftime("%Y-%m-%dT%H:%M"),
+      class: "form-control" %>
+  </div>
+
+  <!-- CAPA -->
+  <div class="mb-3">
+    <%= f.label :cover_image, "Imagem de Capa", class: "form-label" %>
+    <%= f.file_field :cover_image, direct_upload: true, class: "form-control" %>
+    <% if post.cover_image&.attached? %>
+      <div class="mt-2">
+        <%= image_tag post.cover_image.variant(resize_to_fill: [400, 200]).processed,
+                      class: "img-fluid rounded" %>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- DESTAQUE -->
+  <div class="form-check mb-3">
+    <%= f.check_box :featured, class: "form-check-input" %>
+    <%= f.label :featured, "Colocar este post no carrossel", class: "form-check-label" %>
+  </div>
+
+  <!-- CONTEÚDO -->
+  <div class="mb-3">
+    <%= f.label :content, "Conteúdo", class: "form-label" %>
+    <div class="trix-wrapper">
+      <%= f.rich_text_area :content, class: "trix-content-box" %>
+    </div>
+  </div>
+
+
+  <!-- MAPAS E VÍDEOS -->
+  <!-- EMBEDS -->
+  <h5 class="mt-4">Mapas e Vídeos</h5>
+
+  <div data-controller="embeds">
+    <div data-embeds-target="container">
+      <%= f.fields_for :embeds do |embed_form| %>
+        <div class="embed-fields border p-2 mb-3 rounded">
+          <%= embed_form.label :title, "Título", class: "form-label" %>
+          <%= embed_form.text_field :title, class: "form-control mb-2" %>
+
+          <%= embed_form.label :code, "Código de incorporação (iframe)", class: "form-label" %>
+          <%= embed_form.text_area :code, rows: 3, class: "form-control mb-2" %>
+
+          <%= embed_form.hidden_field :_destroy %>
+          <%= link_to "Remover", "#", class: "btn btn-sm btn-danger",
+                                      data: { action: "click->embeds#remove" } %>
+        </div>
+      <% end %>
+    </div>
+
+    <!-- Template escondido para novos embeds -->
+    <template data-embeds-target="template">
+      <div class="embed-fields border p-2 mb-3 rounded">
+        <label for="">Título</label>
+        <input type="text" name="post[embeds_attributes][NEW_RECORD][title]"
+               class="form-control mb-2">
+
+        <label for="">Código iframe</label>
+        <textarea name="post[embeds_attributes][NEW_RECORD][code]" rows="3"
+                  class="form-control mb-2"></textarea>
+
+        <input type="hidden" name="post[embeds_attributes][NEW_RECORD][_destroy]" value="false">
+        <a href="#" class="btn btn-sm btn-danger"
+           data-action="click->embeds#remove">Remover</a>
+      </div>
+    </template>
+
+    <button class="btn btn-outline-primary"
+            data-action="click->embeds#add">➕ Adicionar mapa/vídeo</button>
+  </div>
+
+  <!-- BOTÕES -->
+  <%= f.submit "Salvar como Rascunho", name: "commit_type", value: "draft", class: "btn btn-secondary" %>
+  <%= f.submit "Publicar", name: "commit_type", value: "publish", class: "btn btn-primary" %>
+  <%= button_tag "view",
+        type: "submit",
+        formmethod: "post",
+        formaction: preview_live_posts_path,
+        formtarget: "_blank",
+        class: "btn btn-info" %>
+<% end %>

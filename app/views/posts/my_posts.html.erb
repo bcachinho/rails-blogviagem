@@ -1,0 +1,57 @@
+<div class="container py-4">
+  <div class="row">
+    <div class="col-md-6">
+      <h3>📢 Publicados</h3>
+      <% if @published.present? %>
+        <% @published.each do |post| %>
+          <div class="card mb-3">
+            <div class="card-body d-flex justify-content-between align-items-center">
+              <div>
+                <h5 class="card-title"><%= link_to post.title, post_path(post) %></h5>
+                <p class="card-text text-muted"><%= post.excerpt %></p>
+              </div>
+              <% if current_user.admin? %>
+                <div class="text-end">
+                  <%= link_to "Editar", edit_post_path(post), class: "btn btn-sm btn-primary mb-1" %>
+                  <%= button_to "Excluir", post_path(post),
+                                method: :delete,
+                                data: { confirm: "Tem certeza que deseja apagar este post?" },
+                                class: "btn btn-sm btn-danger" %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      <% else %>
+        <p class="text-muted">Nenhum post publicado ainda.</p>
+      <% end %>
+    </div>
+
+    <% if current_user.admin? %>
+      <div class="col-md-6">
+        <h3>📝 Rascunhos</h3>
+        <% if @drafts.present? %>
+          <% @drafts.each do |post| %>
+            <div class="card mb-3 border-warning">
+              <div class="card-body d-flex justify-content-between align-items-center">
+                <div>
+                  <h5 class="card-title"><%= link_to post.title, edit_post_path(post) %></h5>
+                  <p class="card-text text-muted"><%= post.excerpt.presence || "Sem subtítulo" %></p>
+                </div>
+                <div class="text-end">
+                  <%= link_to "Editar", edit_post_path(post), class: "btn btn-sm btn-warning mb-1" %>
+                  <%= button_to "Excluir", post_path(post),
+                                method: :delete,
+                                data: { confirm: "Tem certeza que deseja apagar este rascunho?" },
+                                class: "btn btn-sm btn-danger" %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        <% else %>
+          <p class="text-muted">Nenhum rascunho.</p>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>

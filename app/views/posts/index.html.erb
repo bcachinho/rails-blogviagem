@@ -1,0 +1,37 @@
+<div class="container py-4">
+  <!-- Barra de busca -->
+  <div class="row mb-4">
+    <div class="col-md-8 mx-auto">
+      <%= form_with url: posts_path, method: :get, local: true, class: "input-group" do %>
+        <%= text_field_tag :q, @query, placeholder: "Pesquisar posts...", class: "form-control" %>
+        <button class="btn btn-outline-primary" type="submit">Buscar</button>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Se houver posts -->
+  <% if @posts.any? %>
+
+    <% if current_user&.admin? %>
+      <h2 class="mb-3 playfair_title_caroussel">📢 Publicados</h2>
+      <% @posts.select { |p| p.published_at.present? }.each do |post| %>
+        <%= render partial: "posts/post_card", locals: { post: post } %>
+      <% end %>
+
+    <% else %>
+      <!-- Para usuários comuns: mostra apenas publicados -->
+      <% @posts.select { |p| p.published_at.present? }.each do |post| %>
+        <%= render partial: "posts/post_card", locals: { post: post } %>
+      <% end %>
+    <% end %>
+
+  <% else %>
+    <div class="alert alert-warning text-center">
+      <% if @query.present? %>
+        Nenhum resultado encontrado para "<strong><%= @query %></strong>".
+      <% else %>
+        Nenhum post publicado ainda.
+      <% end %>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,7 @@
+<h1>Editar post</h1>
+<%= render "form", post: @post %>
+<%= button_to "Excluir definitivamente",
+      post_path(@post.id),
+      method: :delete,
+      form: { data: { turbo_frame: "_top" } },
+      class: "btn btn-danger" %>

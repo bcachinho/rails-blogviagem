@@ -1,0 +1,146 @@
+/*
+ *= require trix
+ *= require actiontext
+*/
+
+/* aumenta a altura mínima do editor Trix em todo o app */
+
+.trix-wrapper {
+  display: flex;
+  flex-direction: column; /* toolbar em cima + editor embaixo */
+  border: 1px solid #dee2e6;
+  border-radius: 0.25rem;
+  background: #fff;
+  overflow: hidden;
+}
+
+/* toolbar horizontal no topo */
+.trix-wrapper trix-toolbar {
+  order: -1;                 /* garante que fica antes do editor */
+  position: sticky;          /* gruda no topo ao rolar */
+  top: 0px;                 /* ajuste se tiver navbar fixa */
+  z-index: 20;
+  background: #fff;
+  border-bottom: 1px solid #ccc;
+}
+
+/* editor com altura fixa */
+.trix-wrapper trix-editor {
+  min-height: 300px;
+  max-height: 400px;         /* altura fixa */
+  overflow-y: auto;          /* scroll interno */
+  padding: 1rem;
+  border: none;
+  outline: none;
+}
+
+blockquote{
+  text-align: center;
+}
+
+.trix-button-group--text-tools .trix-button {
+  min-width: 2rem;
+  font-size: 1.1rem;
+}
+
+.trix-content{
+  width: 95%;
+  margin: 0 auto;
+}
+
+.badge2{
+  width: 100%;
+  margin: 0 auto;
+}
+/* aumenta a altura mínima do editor Trix em todo o app */
+
+.playfair_title_caroussel {
+  font-family: "Playfair", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 50px;
+  font-variation-settings:
+    "wdth" 100;
+}
+
+.playfair_subtitle_caroussel {
+  font-family: "Playfair", serif;
+  font-optical-sizing: auto;
+  font-weight: 100;
+  font-style: italic;
+  font-size: 30px;
+  font-variation-settings:
+    "wdth" 100;
+}
+
+.playfair_text{
+  font-family: "Playfair", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 24px;
+  font-variation-settings:
+    "wdth" 100;
+}
+
+.playfair_title_show {
+  font-family: "Playfair", serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+  font-size: 65px;
+  font-variation-settings:
+    "wdth" 100;
+}
+
+.playfair_title_ultimas {
+  font-family: "Playfair", serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+  text-transform: uppercase;
+  font-size: 40px;
+  font-variation-settings:
+    "wdth" 100;
+}
+
+@media only screen and (max-width: 449px) {
+  #logo_blog{
+    width: 100%;
+    height: auto;
+  }
+}
+
+/* celulares bem pequenos */
+@media (max-width: 767px) {
+
+  .carousel-caption p.playfair_subtitle_caroussel {
+    display: none;      /* oculta subtítulo em telas muito pequenas */
+  }
+}
+
+/* celulares bem pequenos */
+@media (max-width: 576px) {
+  .carousel-caption h5.playfair_title_caroussel {
+    font-size: 2.5rem;
+  }
+
+  .carousel-caption p.playfair_subtitle_caroussel {
+    display: none;      /* oculta subtítulo em telas muito pequenas */
+  }
+
+  .playfair_title_show {
+  font-size: 50px;
+  }
+
+  .playfair_text{
+  font-size: 20px;
+  }
+}
+
+.card-img-top {
+  height: 180px;         /* ou 200px, escolha um padrão */
+  object-fit: cover;     /* cobre toda a área sem distorcer */
+  width: 100%;           /* garante largura total do card */
+}

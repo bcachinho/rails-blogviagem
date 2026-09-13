@@ -1,0 +1,91 @@
+<% if @featured_posts.any? %>
+  <div id="homeCarousel" class="carousel slide m-2" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <% @featured_posts.each_with_index do |post, i| %>
+        <div class="carousel-item <%= "active" if i == 0 %>">
+          <% if post.cover_image&.attached? %>
+            <%= image_tag post.cover_image.variant(resize_to_fill: [1200, 400]).processed,
+                          class: "d-block w-100",
+                          style: "height: 400px; object-fit: cover;" %>
+          <% elsif post.images.attached? %>
+            <%= image_tag post.images.first.variant(resize_to_fill: [1200, 400]).processed,
+                          class: "d-block w-100",
+                          style: "height: 400px; object-fit: cover;" %>
+          <% else %>
+            <%= image_tag "placeholder.jpg", class: "d-block w-100",
+                          style: "height: 400px; object-fit: cover;" %>
+          <% end %>
+          <div class="carousel-caption d-xs-block bg-dark bg-opacity-50 rounded p-3">
+            <h5 class="playfair_title_caroussel" ><%= post.title%></h5>
+            <p class="playfair_subtitle_caroussel"><%= truncate(post.excerpt || post.content.to_plain_text, length: 120) %></p>
+            <%= link_to "Ler mais", post_path(post), class: "btn btn-outline-light btn-sm" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <!-- Controles -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#homeCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Anterior</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#homeCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Próximo</span>
+    </button>
+  </div>
+<% end %>
+
+<h2 class="playfair_title_ultimas pt-2 text-center text-muted">As últimas publicações</h2>
+<hr>
+
+<!-- GRID DE POSTS RECENTES (2 LINHAS x 3 CARDS) -->
+<% if @recent_posts.any? %>
+  <div class="container-fluid">
+    <% @recent_posts.each_slice(3) do |row_posts| %>
+      <div class="row mb-4">
+        <% row_posts.each do |post| %>
+          <div class="col-md-4 mb-3">
+            <div class="card h-100 shadow-sm">
+              <!-- Imagem do card -->
+              <% if post.cover_image&.attached? %>
+                <%= image_tag post.cover_image.variant(resize_to_fill: [400, 180]).processed,
+                              class: "card-img-top" %>
+              <% elsif post.images.attached? %>
+                <%= image_tag post.images.first.variant(resize_to_fill: [400, 180]).processed,
+                              class: "card-img-top" %>
+              <% else %>
+                <%= image_tag "placeholder.jpg", class: "card-img-top",
+                              style: "height: 180px; object-fit: cover;" %>
+              <% end %>
+              <!-- Conteúdo do card -->
+              <div class="card-body d-flex flex-column">
+                <h5 class="card-title playfair_text"><%= post.title %></h5>
+                <p class="card-text text-muted">
+                  <%= truncate(post.excerpt || post.content.to_plain_text, length: 100) %>
+                </p>
+                <div class="mt-auto">
+                  <%= link_to "Ler mais", post_path(post), class: "btn btn-sm btn-outline-primary" %>
+                </div>
+              </div>
+
+              <!-- Footer do card (opcional: data, autor) -->
+              <div class="card-footer bg-transparent border-0">
+                <small class="text-muted">
+                  Por <%= post.author.name.presence || post.author.email %> •
+                  <%= post.published_at.strftime("%d/%m/%Y") %>
+                </small>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <!-- Mensagem quando não há posts -->
+  <div class="text-center py-5">
+    <h4 class="text-muted">Nenhum post publicado ainda</h4>
+    <p class="text-muted">Volte em breve para conferir nossos conteúdos!</p>
+  </div>
+<% end %>

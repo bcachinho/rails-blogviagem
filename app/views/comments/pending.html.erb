@@ -1,0 +1,42 @@
+<div class="container py-4">
+  <h2 class="mb-4">📝 Comentários pendentes</h2>
+
+  <% if @comments.any? %>
+    <div class="row">
+      <% @comments.each do |comment| %>
+        <div class="col-md-6 mb-4">
+          <div class="card shadow-sm h-100">
+            <div class="card-body">
+              <h5 class="card-title">
+                <%= comment.user&.name.presence || comment.user&.email || "Convidado" %>
+              </h5>
+              <h6 class="card-subtitle mb-2 text-muted">
+                em <%= link_to comment.post.title, post_path(comment.post), class: "text-decoration-none" %><br>
+                <small><%= l(comment.created_at, format: :short) %></small>
+              </h6>
+
+              <p class="card-text"><%= simple_format(comment.content) %></p>
+            </div>
+
+            <div class="card-footer d-flex justify-content-between">
+              <%= button_to "Aprovar",
+                            approve_post_comment_path(comment.post, comment),
+                            method: :patch,
+                            class: "btn btn-sm btn-success" %>
+
+              <%= button_to "Rejeitar",
+                            post_comment_path(comment.post, comment),
+                            method: :delete,
+                            class: "btn btn-sm btn-danger",
+                            data: { confirm: "Tem certeza que deseja excluir este comentário?" } %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="alert alert-info text-center">
+      Nenhum comentário pendente 🎉
+    </div>
+  <% end %>
+</div>
