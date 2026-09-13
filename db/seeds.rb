@@ -1,7 +1,7 @@
 # db/seeds.rb
 admins = [
-  { email: "admin@blogdeviagem.com", name: "Administrador", password: ENV.fetch("ADMIN1_PASSWORD") },
-  { email: "outra-pessoa@example.com", name: "Segundo Admin", password: ENV.fetch("ADMIN2_PASSWORD") }
+  { email: "bruno.cachinho@gmail.com", name: "Administrador", password: ENV.fetch("ADMIN1_PASSWORD") },
+  { email: "renato.viagista@gmail.com", name: "Administrador", password: ENV.fetch("ADMIN2_PASSWORD") }
 ]
 
 admins.each do |data|
