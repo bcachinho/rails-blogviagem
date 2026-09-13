@@ -27,7 +27,6 @@ gem "bcrypt", "~> 3.1.7"
 gem 'friendly_id', '~> 5.4'
 gem 'cancancan', '~> 3.0'
 gem 'devise'
-gem 'image_processing', '~> 1.2'
 gem 'mini_magick'
 gem 'trix-rails'
 gem 'rails-i18n'
@@ -68,3 +67,5 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+gem "dockerfile-rails", ">= 1.7", group: :development

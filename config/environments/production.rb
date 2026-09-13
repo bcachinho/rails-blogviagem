@@ -79,12 +79,12 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
 
-  config.action_mailer.default_url_options = { host: "SEU_DOMINIO_AQUI", protocol: "https" }
+  config.action_mailer.default_url_options = { host: "maishumblogdeviagem.fly.dev", protocol: "https" }
 
   config.action_mailer.smtp_settings = {
     address: "smtp.sendgrid.net",
     port: 587,
-    domain: "SEU_DOMINIO_AQUI",
+    domain: "maishumblogdeviagem.fly.dev",
     user_name: "apikey",
     password: Rails.application.credentials.dig(:sendgrid, :api_key),
     authentication: "plain",
