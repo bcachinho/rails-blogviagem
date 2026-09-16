@@ -6,7 +6,7 @@
 <span class="badge badge2 text-dark">★ <%= @post.favorites.count %> vez(es) favoritado</span>
 <hr>
 
-<div class="trix-content playfair_text p-0 post-body" style="text-align: <%= @post.text_alignment %>;">
+<div class="trix-content playfair_text p-0 post-body" style="text-align: <%= @post.text_alignment %>;" data-controller="external-links">
   <%= @post.content %>
 </div>
 
