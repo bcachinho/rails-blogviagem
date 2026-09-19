@@ -15,9 +15,9 @@
         <h5 class="text-uppercase mb-4">Links Rápidos</h5>
         <ul class="list-unstyled">
           <li><%= link_to "Home", root_path, class: "text-decoration-none text-reset" %></li>
-          <li><%= link_to "Posts", posts_path, , class: "text-decoration-none text-reset" %></li>
+          <li><%= link_to "Posts", posts_path, class: "text-decoration-none text-reset" %></li>
           <% if user_signed_in? %>
-            <li><%= link_to "Meus Favoritos", favorites_path, , class: "text-decoration-none text-reset" %></li>
+            <li><%= link_to "Meus Favoritos", favorites_path, class: "text-decoration-none text-reset" %></li>
           <% end %>
         </ul>
       </div>
