@@ -14,11 +14,10 @@
       <div class="col-md-4 mb-4 mb-md-0">
         <h5 class="text-uppercase mb-4">Links Rápidos</h5>
         <ul class="list-unstyled">
-          <li><%= link_to "Home", root_path %></li>
-          <li><%= link_to "Posts", posts_path %></li>
+          <li><%= link_to "Home", root_path, class: "text-decoration-none text-reset" %></li>
+          <li><%= link_to "Posts", posts_path, , class: "text-decoration-none text-reset" %></li>
           <% if user_signed_in? %>
-            <li><%= link_to "Meus Favoritos", favorites_path %></li>
-            <li><%= link_to "Meus Rascunhos", my_posts_posts_path %></li>
+            <li><%= link_to "Meus Favoritos", favorites_path, , class: "text-decoration-none text-reset" %></li>
           <% end %>
         </ul>
       </div>
@@ -40,6 +39,7 @@
             <i class="fab fa-pinterest-p fa-lg"></i>
           </a>
         </div>
+        <hr class="my-4 border-secondary">
         <h5 class="text-uppercase mb-3">Contato</h5>
           <p>
             Tem uma sugestão, dúvida ou história para compartilhar?
