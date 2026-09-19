@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>RailsBlogViagem</title>
+    <title><%= content_for?(:title) ? yield(:title) + " | Mais Hum Blog de Viagem" : "Mais Hum Blog de Viagem" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
 
     <%= csrf_meta_tags %>
@@ -20,6 +20,10 @@
 
     <!-- Importmap para JS -->
     <%= javascript_importmap_tags %>
+
+    <!-- Ícone da aba do navegador (Favicon) -->
+    <%= favicon_link_tag 'favicon.png' %>
+    <%= favicon_link_tag 'favicon.png', rel: 'apple-touch-icon', type: 'image/png' %>
 
     <!-- ... outros links e meta tags ... -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
