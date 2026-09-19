@@ -5,7 +5,7 @@
       <!-- Coluna 1: Sobre o Blog -->
       <div class="col-md-4 mb-4 mb-md-0">
         <h5 class="text-uppercase mb-3">Sobre o Blog</h5>
-        <p class="playfair_font">
+        <p>
           Viajar é sobre lugares — mas também é sobre sabores. Entre um ponto turístico e outro, sempre cabe uma boa mesa. Siga com a gente nessa jornada de estradas, culturas e boa gastronomia.
         </p>
       </div>
@@ -40,11 +40,15 @@
             <i class="fab fa-pinterest-p fa-lg"></i>
           </a>
         </div>
-        <li>
+        <h5 class="text-uppercase mb-3">Contato</h5>
+          <p>
+            Tem uma sugestão, dúvida ou história para compartilhar?
+            Envie uma mensagem para nós.
+          </p>
+          <p>
             <%= mail_to "contato@maishumblogdeviagem.com.br",
-              "Contato",
-              subject: "Contato pelo Mais Hum Blog de Viagem" %>
-          </li>
+                "contato@maishumblogdeviagem.com.br" %>
+          </p>
       </div>
 
     </div>
