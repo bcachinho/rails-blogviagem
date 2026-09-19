@@ -180,7 +180,7 @@ Rails.application.configure do
     domain: "maishumblogdeviagem.fly.dev",
     host: "maishumblogdeviagem.com.br",
     user_name: "apikey",
-    password: ENV.fetch("SENDGRID_API_KEY"),
+    password: ENV["SENDGRID_API_KEY"],
     authentication: :plain,
     enable_starttls_auto: true
   }
