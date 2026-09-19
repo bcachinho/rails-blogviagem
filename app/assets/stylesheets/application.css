@@ -54,6 +54,10 @@ blockquote{
 }
 /* aumenta a altura mínima do editor Trix em todo o app */
 
+.playfair_font{
+  font-family: "Playfair", serif;
+}
+
 .playfair_title_caroussel {
   font-family: "Playfair", serif;
   font-optical-sizing: auto;
