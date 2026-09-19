@@ -178,6 +178,7 @@ Rails.application.configure do
     address: "smtp.sendgrid.net",
     port: 587,
     domain: "maishumblogdeviagem.fly.dev",
+    host: "maishumblogdeviagem.com.br",
     user_name: "apikey",
     password: ENV.fetch("SENDGRID_API_KEY"),
     authentication: :plain,
