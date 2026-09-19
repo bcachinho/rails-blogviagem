@@ -5,9 +5,8 @@
       <!-- Coluna 1: Sobre o Blog -->
       <div class="col-md-4 mb-4 mb-md-0">
         <h5 class="text-uppercase mb-4">Sobre o Blog</h5>
-        <p class="text-muted">
-          Seu blog de viagens é o lugar perfeito para explorar novos destinos,
-          dicas de roteiros e histórias inspiradoras. Junte-se a nós nessa jornada!
+        <p>
+          Viajar é sobre lugares — mas também é sobre sabores. Entre um ponto turístico e outro, sempre cabe uma boa mesa. Siga com a gente nessa jornada de estradas, culturas e boa gastronomia.
         </p>
       </div>
 
@@ -15,13 +14,17 @@
       <div class="col-md-4 mb-4 mb-md-0">
         <h5 class="text-uppercase mb-4">Links Rápidos</h5>
         <ul class="list-unstyled">
-          <li><%= link_to "Home", root_path, class: "text-muted text-decoration-none" %></li>
-          <li><%= link_to "Posts", posts_path, class: "text-muted text-decoration-none" %></li>
+          <li><%= link_to "Home", root_path %></li>
+          <li><%= link_to "Posts", posts_path %></li>
           <% if user_signed_in? %>
-            <li><%= link_to "Meus Favoritos", favorites_path, class: "text-muted text-decoration-none" %></li>
-            <li><%= link_to "Meus Rascunhos", my_posts_posts_path, class: "text-muted text-decoration-none" %></li>
+            <li><%= link_to "Meus Favoritos", favorites_path %></li>
+            <li><%= link_to "Meus Rascunhos", my_posts_posts_path %></li>
           <% end %>
-          <li><%= link_to "Contato", "#", class: "text-muted text-decoration-none" %></li>
+          <li>
+            <%= mail_to "contato@maishumblogdeviagem.com.br",
+              "Contato",
+              subject: "Contato pelo Mais Hum Blog de Viagem" %>
+          </li>
         </ul>
       </div>
 
