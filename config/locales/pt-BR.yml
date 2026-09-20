@@ -9,40 +9,47 @@ pt-BR:
       default: "%d/%m/%Y %H:%M"
       long: "%d de %B de %Y %H:%M"
       short: "%d/%m %H:%M"
-  errors:
-    messages:
-      not_saved:
-        one: "1 erro impediu que este %{resource} fosse salvo:"
-        other: "%{count} erros impediram que este %{resource} fosse salvo:"
   devise:
-    mailer:
-      confirmation_instructions:
-        subject: "Bem-vindo(a) ao Mais Hum Blog de Viagem! Confirme seu e-mail"
-      reset_password_instructions:
-        subject: "Instruções para redefinir sua senha"
-      password_change:
-        subject: "Sua senha foi alterada"
-      email_changed:
-        subject: "Seu e-mail foi alterado"
-      unlock_instructions:
-        subject: "Instruções para desbloquear sua conta"
-    registrations:
-      signed_up: "Cadastro realizado! Verifique seu e-mail para confirmar a conta antes de entrar."
-      signed_up_but_unconfirmed: "Cadastro realizado! Enviamos um e-mail de confirmação. Por favor, clique no link para ativar sua conta."
-      update_needs_confirmation: "Seus dados foram atualizados. Confirme o novo e-mail para que a alteração entre em vigor."
-      updated: "Seus dados foram atualizados com sucesso."
-      destroyed: "Sua conta foi encerrada. Esperamos te ver de volta em breve!"
     confirmations:
       confirmed: "Seu e-mail foi confirmado! Agora você já pode entrar."
       send_instructions: "Enviamos um novo e-mail de confirmação. Verifique sua caixa de entrada."
       send_paranoid_instructions: "Se seu e-mail estiver cadastrado, você receberá as instruções em breve."
+      already_confirmed: "Seu e-mail já foi confirmado. Tente entrar normalmente."
+    registrations:
+      signed_up: "Cadastro realizado! Verifique seu e-mail para confirmar a conta."
+      signed_up_but_unconfirmed: "Cadastro realizado! Enviamos um e-mail de confirmação. Por favor, clique no link para ativar sua conta."
+      update_needs_confirmation: "Seus dados foram atualizados. Confirme o novo e-mail para que a alteração entre em vigor."
+      updated: "Seus dados foram atualizados com sucesso."
+      destroyed: "Sua conta foi encerrada. Esperamos te ver de volta em breve!"
     sessions:
       signed_in: "Bem-vindo(a) de volta! 😊"
       signed_out: "Até logo! Você saiu da sua conta."
     passwords:
       send_instructions: "Se o e-mail estiver cadastrado, enviaremos as instruções de redefinição de senha."
+      send_paranoid_instructions: "Se o e-mail estiver cadastrado, enviaremos as instruções de redefinição de senha."
       updated: "Sua senha foi redefinida. Você já está logado(a)."
       updated_not_active: "Sua senha foi redefinida com sucesso."
     unlocks:
       send_instructions: "Enviamos as instruções de desbloqueio para o seu e-mail."
       unlocked: "Sua conta foi desbloqueada! Entre para continuar."
+    mailer:
+      confirmation_instructions:
+        subject: "Confirme seu e-mail"
+      reset_password_instructions:
+        subject: "Instruções para redefinir sua senha"
+      unlock_instructions:
+        subject: "Instruções para desbloquear sua conta"
+      email_changed:
+        subject: "E-mail alterado"
+      password_change:
+        subject: "Senha alterada"
+  errors:
+    messages:
+      already_confirmed: "já foi confirmado. Tente entrar normalmente."
+      confirmation_period_expired: "precisa ser confirmado em %{period}. Solicite um novo."
+      expired: "expirou. Solicite um novo."
+      not_found: "não encontrado."
+      not_locked: "não está bloqueado."
+      not_saved:
+        one: "1 erro impediu que este %{resource} fosse salvo:"
+        other: "%{count} erros impediram que este %{resource} fosse salvo:"
