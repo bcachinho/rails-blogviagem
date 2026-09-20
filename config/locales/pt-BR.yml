@@ -18,3 +18,11 @@ pt-BR:
     mailer:
       confirmation_instructions:
         subject: "Bem-vindo(a) ao Mais Hum Blog de Viagem! Confirme seu e-mail"
+      reset_password_instructions:
+        subject: "Instruções para redefinir sua senha"
+      password_change:
+        subject: "Sua senha foi alterada"
+      email_changed:
+        subject: "Seu e-mail foi alterado"
+      unlock_instructions:
+        subject: "Instruções para desbloquear sua conta"
