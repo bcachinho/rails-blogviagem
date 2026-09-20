@@ -25,10 +25,14 @@
 <% if user_signed_in? %>
   <% if current_user.favorite?(@post) %>
     <%= button_to "★ Remover dos Favoritos", post_favorite_path(@post),
-                  method: :delete, class: "btn btn-outline-danger btn-sm mt-5" %>
+                  method: :delete,
+                  form: { data: { turbo: false } },
+                  class: "btn btn-outline-danger btn-sm mt-5" %>
   <% else %>
     <%= button_to "☆ Adicionar aos Favoritos", post_favorite_path(@post),
-                  method: :post, class: "btn btn-outline-success btn-sm mt-5" %>
+                  method: :post,
+                  form: { data: { turbo: false } },
+                  class: "btn btn-outline-success btn-sm mt-5" %>
   <% end %>
 <% end %>
 
