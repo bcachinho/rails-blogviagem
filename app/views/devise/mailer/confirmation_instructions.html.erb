@@ -1,5 +1,114 @@
-<p>Welcome <%= @email %>!</p>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    <style>
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        color: #333333;
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+        background-color: #f8f9fa;
+      }
+      .container {
+        max-width: 600px;
+        margin: 20px auto;
+        background-color: #ffffff;
+        border-radius: 8px;
+        overflow: hidden;
+        border: 1px solid #e9ecef;
+      }
+      .header {
+        background-color: #1a1a1a;
+        color: #ffffff;
+        text-align: center;
+        padding: 30px 20px;
+      }
+      .header h1 {
+        margin: 0;
+        font-size: 24px;
+        font-family: "Playfair Display", Georgia, serif;
+        letter-spacing: 0.5px;
+      }
+      .header p {
+        margin: 8px 0 0 0;
+        font-size: 14px;
+        color: #cccccc;
+        font-style: italic;
+      }
+      .content {
+        padding: 30px;
+      }
+      .content p {
+        font-size: 15px;
+        margin-bottom: 16px;
+      }
+      .button-wrapper {
+        text-align: center;
+        margin: 32px 0;
+      }
+      .button {
+        background-color: #198754;
+        color: #ffffff !important;
+        text-decoration: none;
+        padding: 14px 28px;
+        font-size: 16px;
+        font-weight: bold;
+        border-radius: 6px;
+        display: inline-block;
+      }
+      .footer {
+        background-color: #f8f9fa;
+        text-align: center;
+        padding: 20px;
+        font-size: 12px;
+        color: #6c757d;
+        border-top: 1px solid #e9ecef;
+      }
+      .footer a {
+        color: #198754;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <%= image_tag "logo_humblog.png", alt: "Meu Blog", height: 125, class:"me-2", id:"logo_blog" %>
+        <h1>Mais Hum Blog de Viagem</h1>
+        <p>Entre um ponto turístico e outro, sempre cabe uma boa mesa.</p>
+      </div>
 
-<p>You can confirm your account email through the link below:</p>
+      <div class="content">
+        <p>Olá, <strong><%= @resource.name.presence || @email %></strong>!</p>
 
-<p><%= link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token) %></p>
+        <p>Que alegria ter você por aqui! Seja muito bem-vindo(a) à nossa comunidade de viajantes.</p>
+
+        <p>O <em>Mais Hum Blog de Viagem</em> foi feito para quem gosta de pesquisar antes de ir, cruzar boas referências e descobrir não só os pontos imperdíveis, mas também as melhores mesas e sabores de cada destino.</p>
+
+        <p>Com a sua conta ativa, você pode salvar seus posts favoritos para consultar durante o planejamento da viagem e participar das conversas nos comentários.</p>
+
+        <p>Para confirmar seu endereço de e-mail e ativar o seu acesso completo, basta clicar no botão abaixo:</p>
+
+        <div class="button-wrapper">
+          <%= link_to 'Confirmar meu e-mail', confirmation_url(@resource, confirmation_token: @token), class: 'button' %>
+        </div>
+
+        <p style="font-size: 13px; color: #6c757d;">Se o botão não funcionar, copie e cole o link a seguir no seu navegador:<br>
+          <span style="word-break: break-all;"><%= confirmation_url(@resource, confirmation_token: @token) %></span>
+        </p>
+
+        <p>Se você não criou essa conta, pode desconsiderar esta mensagem com tranquilidade.</p>
+
+        <p>Nos vemos na estrada,<br>
+        <strong>Equipe Mais Hum Blog de Viagem</strong></p>
+      </div>
+
+      <div class="footer">
+        <p>&copy; <%= Time.current.year %> Mais Hum Blog de Viagem. Todos os direitos reservados.</p>
+        <p><a href="https://maishumblogdeviagem.com.br">maishumblogdeviagem.com.br</a></p>
+      </div>
+    </div>
+  </body>
+</html>
