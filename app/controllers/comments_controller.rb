@@ -3,7 +3,7 @@ class CommentsController < ApplicationController
   before_action :authorize_admin!, only: [:pending, :approve]
 
   def create
-    @post = Post.find(params[:post_id])
+    @post = Post.find_by!(slug: params[:post_id])
     @comment = @post.comments.build(comment_params)
     @comment.user = current_user
     @comment.approved = false  # ← adicionar esta linha
@@ -16,14 +16,14 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    @post = Post.find(params[:post_id])
+    @post = Post.find_by!(slug: params[:post_id])
     @comment = @post.comments.find(params[:id])
     @comment.destroy!
     redirect_to pending_comments_path, notice: "Comentário rejeitado/excluído."
   end
 
   def approve
-    @post = Post.find(params[:post_id])
+    @post = Post.find_by!(slug: params[:post_id])
     @comment = @post.comments.find(params[:id])
     @comment.update!(approved: true)
     redirect_to pending_comments_path, notice: "Comentário aprovado!"
@@ -45,7 +45,7 @@ class CommentsController < ApplicationController
 end
 
 def create
-  @post = Post.find(params[:post_id])
+  @post = Post.find_by!(slug: params[:post_id])
   @comment = @post.comments.build(comment_params)
   @comment.user = current_user
 end
