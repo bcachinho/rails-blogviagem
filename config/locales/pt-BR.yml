@@ -26,3 +26,23 @@ pt-BR:
         subject: "Seu e-mail foi alterado"
       unlock_instructions:
         subject: "Instruções para desbloquear sua conta"
+    registrations:
+      signed_up: "Cadastro realizado! Verifique seu e-mail para confirmar a conta antes de entrar."
+      signed_up_but_unconfirmed: "Cadastro realizado! Enviamos um e-mail de confirmação. Por favor, clique no link para ativar sua conta."
+      update_needs_confirmation: "Seus dados foram atualizados. Confirme o novo e-mail para que a alteração entre em vigor."
+      updated: "Seus dados foram atualizados com sucesso."
+      destroyed: "Sua conta foi encerrada. Esperamos te ver de volta em breve!"
+    confirmations:
+      confirmed: "Seu e-mail foi confirmado! Agora você já pode entrar."
+      send_instructions: "Enviamos um novo e-mail de confirmação. Verifique sua caixa de entrada."
+      send_paranoid_instructions: "Se seu e-mail estiver cadastrado, você receberá as instruções em breve."
+    sessions:
+      signed_in: "Bem-vindo(a) de volta! 😊"
+      signed_out: "Até logo! Você saiu da sua conta."
+    passwords:
+      send_instructions: "Se o e-mail estiver cadastrado, enviaremos as instruções de redefinição de senha."
+      updated: "Sua senha foi redefinida. Você já está logado(a)."
+      updated_not_active: "Sua senha foi redefinida com sucesso."
+    unlocks:
+      send_instructions: "Enviamos as instruções de desbloqueio para o seu e-mail."
+      unlocked: "Sua conta foi desbloqueada! Entre para continuar."
