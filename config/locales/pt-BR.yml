@@ -9,3 +9,8 @@ pt-BR:
       default: "%d/%m/%Y %H:%M"
       long: "%d de %B de %Y %H:%M"
       short: "%d/%m %H:%M"
+  errors:
+    messages:
+      not_saved:
+        one: "1 erro impediu que este %{resource} fosse salvo:"
+        other: "%{count} erros impediram que este %{resource} fosse salvo:"
