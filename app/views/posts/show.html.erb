@@ -54,7 +54,7 @@
   <%= form_with(model: [@post, Comment.new], local: true) do |f| %>
     <div class="mb-3">
       <%= f.text_area :content, rows: 3, class: "form-control",
-                      placeholder: "Escreva seu comentário..." %>
+                    placeholder: "Escreva seu comentário..." %>
     </div>
     <%= f.submit "Comentar", class: "btn btn-primary" %>
   <% end %>
@@ -76,7 +76,14 @@
 
         <% if current_user&.admin? && !comment.approved? %>
           <%= button_to "Aprovar", approve_post_comment_path(@post, comment),
-                        method: :patch, class: "btn btn-sm btn-success" %>
+                    method: :patch, class: "btn btn-sm btn-success" %>
+        <% end %>
+
+        <% if current_user&.admin? %>
+          <%= button_to "Apagar", post_comment_path(@post, comment),
+                    method: :delete,
+                    data: { turbo_confirm: "Tem certeza que deseja apagar este comentário?" },
+                    class: "btn btn-sm btn-danger" %>
         <% end %>
 
         <!-- Botão responder -->
@@ -91,7 +98,7 @@
               <%= f.hidden_field :parent_id, value: comment.id %>
               <div class="mb-2">
                 <%= f.text_area :content, rows: 2, class: "form-control",
-                                placeholder: "Escreva sua resposta..." %>
+                    placeholder: "Escreva sua resposta..." %>
               </div>
               <%= f.submit "Enviar resposta", class: "btn btn-sm btn-primary" %>
             <% end %>
@@ -110,7 +117,14 @@
 
               <% if current_user&.admin? && !reply.approved? %>
                 <%= button_to "Aprovar", approve_post_comment_path(@post, reply),
-                              method: :patch, class: "btn btn-sm btn-success" %>
+                    method: :patch, class: "btn btn-sm btn-success" %>
+              <% end %>
+
+              <% if current_user&.admin? %>
+                <%= button_to "Apagar", post_comment_path(@post, reply),
+                    method: :delete,
+                    data: { turbo_confirm: "Tem certeza que deseja apagar esta resposta?" },
+                    class: "btn btn-sm btn-danger" %>
               <% end %>
             </div>
           <% end %>
