@@ -7,7 +7,7 @@ class User < ApplicationRecord
   enum role: { reader: 0, admin: 1 }
 
   has_many :posts, foreign_key: :author_id, dependent: :destroy
-  has_many :comments, dependent: :nullify
+  has_many :comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :favorite_posts, through: :favorites, source: :post
 
