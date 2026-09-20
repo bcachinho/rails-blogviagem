@@ -1,26 +1,35 @@
-<h2>Log in</h2>
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+  <div class="col-12 col-sm-10 col-md-7 col-lg-5">
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+    <div class="card shadow-sm border-0 rounded-4">
+      <div class="card-body p-4 p-md-5">
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
+        <div class="text-center mb-4">
+          <h2 class="fw-bold mb-1">Bem-vindo de volta</h2>
+          <p class="text-muted small">Entre com sua conta para continuar</p>
+        </div>
 
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
-    </div>
-  <% end %>
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
 
-  <div class="actions">
-    <%= f.submit "Log in" %>
-  </div>
-<% end %>
+          <div class="mb-3">
+            <%= f.label :email, "E-mail", class: "form-label fw-semibold" %>
+            <%= f.email_field :email, autofocus: true, autocomplete: "email",
+                class: "form-control form-control-lg rounded-3",
+                placeholder: "seu@email.com" %>
+          </div>
 
-<%= render "devise/shared/links" %>
+          <div class="mb-3">
+            <%= f.label :password, "Senha", class: "form-label fw-semibold" %>
+            <%= f.password_field :password, autocomplete: "current-password",
+                class: "form-control form-control-lg rounded-3",
+                placeholder: "••••••••" %>
+          </div>
+
+          <% if devise_mapping.rememberable? %>
+            <div class="form-check mb-3">
+              <%= f.check_box :remember_me, class: "form-check-input" %>
+              <%= f.label :remember_me, "Lembrar de mim", class: "form-check-label text-muted small" %>
+            </div>
+          <% end %>
+
+          <div class="d-
