@@ -10,5 +10,5 @@ class Comment < ApplicationRecord
 
   # Moderação
   scope :approved, -> { where(approved: true) }
-  scope :pending,  -> { where(approved: false) }
+  scope :pending,  -> { where(approved: [false, nil]) }
 end

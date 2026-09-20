@@ -6,6 +6,7 @@ class CommentsController < ApplicationController
     @post = Post.find(params[:post_id])
     @comment = @post.comments.build(comment_params)
     @comment.user = current_user
+    @comment.approved = false  # ← adicionar esta linha
 
     if @comment.save
       redirect_to @post, notice: "Comentário enviado!"
@@ -17,7 +18,6 @@ class CommentsController < ApplicationController
   def destroy
     @post = Post.find(params[:post_id])
     @comment = @post.comments.find(params[:id])
-    authorize! :destroy, @comment
     @comment.destroy!
     redirect_to pending_comments_path, notice: "Comentário rejeitado/excluído."
   end
@@ -42,4 +42,10 @@ class CommentsController < ApplicationController
   def authorize_admin!
     redirect_to root_path, alert: "Acesso restrito a administradores." unless current_user&.admin?
   end
+end
+
+def create
+  @post = Post.find(params[:post_id])
+  @comment = @post.comments.build(comment_params)
+  @comment.user = current_user
 end
