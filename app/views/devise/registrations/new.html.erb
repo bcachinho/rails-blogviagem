@@ -6,7 +6,6 @@
     </div>
 
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "p-4 border rounded shadow-sm bg-white" }) do |f| %>
-      <%= render "devise/shared/error_messages", resource: resource %>
 
       <div class="mb-3">
         <%= f.label :name, "Nome completo", class: "form-label fw-semibold" %>
