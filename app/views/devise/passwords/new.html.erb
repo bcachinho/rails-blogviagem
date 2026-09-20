@@ -1,47 +1,16 @@
-<div class="row justify-content-center mt-5 mb-5">
-  <div class="col-md-6 col-lg-5">
-    <div class="text-center mb-4">
-      <h2 class="playfair_title_show mb-2">Criar Conta</h2>
-      <p class="text-muted small">Junte-se à nossa comunidade para salvar seus posts favoritos e participar das conversas.</p>
-    </div>
+<h2>Forgot your password?</h2>
 
-    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "p-4 border rounded shadow-sm bg-white" }) do |f| %>
-      <%= render "devise/shared/error_messages", resource: resource %>
+<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
 
-      <div class="mb-3">
-        <%= f.label :name, "Nome completo", class: "form-label fw-semibold" %>
-        <%= f.text_field :name, autofocus: true, autocomplete: "name", class: "form-control", placeholder: "Como gostaria de ser chamado(a)?" %>
-      </div>
-
-      <div class="mb-3">
-        <%= f.label :email, "E-mail", class: "form-label fw-semibold" %>
-        <%= f.email_field :email, autocomplete: "email", class: "form-control", placeholder: "seu@email.com" %>
-      </div>
-
-      <div class="mb-3">
-        <%= f.label :password, "Senha", class: "form-label fw-semibold" %>
-        <% if @minimum_password_length %>
-          <span class="text-muted small">(mínimo de <%= @minimum_password_length %> caracteres)</span>
-        <% end %>
-        <%= f.password_field :password, autocomplete: "new-password", class: "form-control", placeholder: "••••••••" %>
-      </div>
-
-      <div class="mb-4">
-        <%= f.label :password_confirmation, "Confirme sua senha", class: "form-label fw-semibold" %>
-        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control", placeholder: "••••••••" %>
-      </div>
-
-      <div class="d-grid gap-2">
-        <%= f.submit "Cadastrar", class: "btn btn-success py-2 fw-semibold" %>
-      </div>
-    <% end %>
-
-    <div class="text-center mt-4">
-      <p class="text-muted small mb-1">
-        Já tem uma conta?
-        <%= link_to "Entrar", new_user_session_path, class: "text-decoration-none fw-semibold text-success" %>
-      </p>
-      <%= link_to "← Voltar para o início", root_path, class: "text-muted small text-decoration-none" %>
-    </div>
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
   </div>
-</div>
+
+  <div class="actions">
+    <%= f.submit "Send me reset password instructions" %>
+  </div>
+<% end %>
+
+<%= render "devise/shared/links" %>
