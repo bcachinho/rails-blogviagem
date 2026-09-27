@@ -148,3 +148,25 @@ blockquote{
   object-fit: cover;     /* cobre toda a área sem distorcer */
   width: 100%;           /* garante largura total do card */
 }
+
+.bg-blue {
+  background-color: #2d4263;
+}
+
+.bg-sand {
+  background-color: #f4ebd9;
+}
+
+.bg-paprika{
+  background-color: #c84b31;
+}
+
+.blue {
+  color: #1a3d7c;
+}
+
+.sand{
+  color: #f4ebd9;
+}
+
+.
