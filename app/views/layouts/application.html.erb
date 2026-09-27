@@ -4,16 +4,19 @@
     <title><%= content_for?(:title) ? yield(:title) + " | Mais Hum Blog de Viagem" : "Mais Hum Blog de Viagem" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
 
-    <meta property="og:title" content="<​%= content_for?(:title) ? yield(:title) : "Mais Hum Blog de Viagem" %>
-    <meta property="og:description" content="<​%= content_for?(:meta_description) ? yield(:meta_description) : "Blog de viagens" %>
-    <meta property="og:image" content="<​%= content_for?(:meta_image) ? yield(:meta_image) : image_url("logo_humblog_blue.png") %>
-    <meta property="og:url" content="<​%= request.original_url %>">
+    <!-- Open Graph / Redes Sociais (WhatsApp, Facebook, etc.) -->
+    <meta property="og:site_name" content="Mais Hum Blog de Viagem">
     <meta property="og:type" content="article">
+    <meta property="og:title" content="<%= content_for?(:title) ? yield(:title) : "Mais Hum Blog de Viagem" %>">
+    <meta property="og:description" content="<%= content_for?(:meta_description) ? yield(:meta_description) : "Blog de viagens" %>">
+    <meta property="og:image" content="<%= content_for?(:meta_image) ? yield(:meta_image) : image_url("logo_humblog_blue.png") %>">
+    <meta property="og:url" content="<%= request.original_url %>">
 
+    <!-- Twitter / X -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="<​%= content_for?(:title) ? yield(:title) : "Mais Hum Blog de Viagem" %>
-    <meta name="twitter:description" content="<​%= content_for?(:meta_description) ? yield(:meta_description) : "Blog de viagens" %>
-    <meta name="twitter:image" content="<​%= content_for?(:meta_image) ? yield(:meta_image) : image_url("logo_humblog_blue.png") %>
+    <meta name="twitter:title" content="<%= content_for?(:title) ? yield(:title) : "Mais Hum Blog de Viagem" %>">
+    <meta name="twitter:description" content="<%= content_for?(:meta_description) ? yield(:meta_description) : "Blog de viagens" %>">
+    <meta name="twitter:image" content="<%= content_for?(:meta_image) ? yield(:meta_image) : image_url("logo_humblog_blue.png") %>">
 
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
